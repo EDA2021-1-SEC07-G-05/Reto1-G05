@@ -36,10 +36,29 @@ los mismos.
 """
 
 # Construccion de modelos
-
+def newCatalog():
+    catalog = {'videos': None,   
+               'category': None}
+    
+    catalog['videos'] = lt.newList()
+    catalog['category'] = lt.newList('ARRAY_LIST')
+    return catalog
 # Funciones para agregar informacion al catalogo
+def addVideo(catalog, video):
+    lt.addLast(catalog['videos'], video)
+    return None
+
+def addCategory(catalog, category):
+    cat = newCategory(category['name'], category['id'])
+    lt.addLast(catalog['category'], cat)
+    return None
 
 # Funciones para creacion de datos
+
+def newCategory(name, ide):
+    category = {'cat_name': name,
+                'cat_id': ide}
+    return category
 
 # Funciones de consulta
 
