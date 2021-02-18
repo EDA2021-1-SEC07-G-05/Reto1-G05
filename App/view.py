@@ -49,6 +49,17 @@ def loadData(catalog):
 def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
 
+def primerVideo(diccionario):
+    title = diccionario['title']
+    cannel_title = diccionario['channel_title']
+    trending_date = diccionario['trending_date']
+    country = diccionario['country']
+    views = diccionario['views']
+    likes = diccionario['likes']
+    dislikes = diccionario['dislikes']
+
+    return title, cannel_title, trending_date, country, views, likes, dislikes
+
 
 """
 Menu principal
@@ -61,7 +72,10 @@ while True:
         catalog = initCatalog()
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+        print('\nLista de categorías')
         print(catalog['category']['elements'])
+        print('\nElementos del primer video')
+        print(primerVideo(getFirstVideo(catalog)))
 
     elif int(inputs[0]) == 2:
         pass

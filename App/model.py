@@ -62,7 +62,7 @@ def newCategory(name, ide):
 
 # Funciones de consulta
 def getFirstVideo(catalog):
-    return lt.firstElement(catalog)
+    return lt.firstElement(catalog['videos'])
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
