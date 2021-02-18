@@ -40,6 +40,8 @@ def loadData(catalog):
     controller.loadData(catalog)
     return None
 
+def getFirstVideo(catalog):
+    return controller.getFirstVideo(catalog)
 
 def printMenu():
     print("Bienvenido")

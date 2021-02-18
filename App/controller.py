@@ -55,3 +55,6 @@ def loadCategory(catalog):
 # Funciones de ordenamiento
 
 # Funciones de consulta sobre el catálogo
+def getFirstVideo(catalog):
+    video_dict = model.getFirstVideo(catalog)
+    return video_dict
