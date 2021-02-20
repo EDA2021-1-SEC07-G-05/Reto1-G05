@@ -36,11 +36,12 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
+    print('2- Ordenar una sublista por views')
     print("0- Salir")
 
 
-def initCatalog():
-    return controller.initCatalog()
+def initCatalog(est_datos):
+    return controller.initCatalog(est_datos)
 
 def loadData(catalog):
     controller.loadData(catalog)
@@ -68,17 +69,32 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        print('\nSelección de estructura:')
+        print('1- Arreglo')
+        print('2- Lista encadenada')
+        est_datos = input('Seleccione que tipo de estructura desea implementar para el catálogo\n')
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
+        catalog = initCatalog(est_datos)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('\nLista de categorías')
         print(catalog['category']['elements'])
         print('\nElementos del primer video')
         print(primerVideo(getFirstVideo(catalog)))
-
+        
     elif int(inputs[0]) == 2:
-        pass
+        i = True
+        while i:
+            numlen = int(input('Digite la longitud de la lista, un número menor o igual a '+str(lt.size(catalog['videos']))+'\n'))
+            if numlen<=lt.size(catalog['videos']):
+                i = False
+        
+        print('\nTipos de ordenamientos disponibles: ')
+        print('1- Insertion Sort')
+        print('2- Selection Sort')
+        print('3- Shell Sort')
+        type_sort = input('Seleccione el tipo de ordenamiento que desea ejecutar:\n')
+        
 
     else:
         sys.exit(0)

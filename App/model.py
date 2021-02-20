@@ -36,11 +36,15 @@ los mismos.
 """
 
 # Construccion de modelos
-def newCatalog():
+def newCatalog(est_datos):
+    if est_datos == 1:
+        x = 'ARRAY_LIST'
+    else:
+        x = 'SINGLE_LINKED'
     catalog = {'videos': None,   
                'category': None}
     
-    catalog['videos'] = lt.newList()
+    catalog['videos'] = lt.newList(x)
     catalog['category'] = lt.newList('ARRAY_LIST')
     return catalog
 # Funciones para agregar informacion al catalogo
@@ -66,5 +70,11 @@ def getFirstVideo(catalog):
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+def cmpVideosByViews(video_1, video_2):
+    if video_1['views']<video_2['views']:
+        valor = True
+    else:
+        valor = False
+    return valor
 
 # Funciones de ordenamiento
