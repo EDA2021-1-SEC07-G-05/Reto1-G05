@@ -33,6 +33,8 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+
+#Holaaa, te voy a dejar estas notas para que sepas que fue lo que hice
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
@@ -49,6 +51,10 @@ def loadData(catalog):
 
 def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
+
+#Aquí cree una función que va a iniciar el proceso de ordenar la sublista de videos, luego la llamo en el menu...
+def sort_sublist(numlen, type_sort):
+    return controller.sort_sublist(numlen, type_sort)
 
 def primerVideo(diccionario):
     title = diccionario['title']
@@ -69,6 +75,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        #Todo esto antes del print('cargando...') es la interfaz que permite escoger con que estructura se va a crear el list de videos
         print('\nSelección de estructura:')
         print('1- Arreglo')
         print('2- Lista encadenada')
@@ -83,19 +90,23 @@ while True:
         print(primerVideo(getFirstVideo(catalog)))
         
     elif int(inputs[0]) == 2:
+        #Con este ciclo, se le pide al usuario el tamaño de la sublista y el ciclo se interrumpe si y solo si el numero que entra es menor al tamaño de  el TAD
         i = True
         while i:
             numlen = int(input('Digite la longitud de la lista, un número menor o igual a '+str(lt.size(catalog['videos']))+'\n'))
             if numlen<=lt.size(catalog['videos']):
                 i = False
-        
+        #Luego, se activa esta interfaz que permite seleccionar el tipo de ordenamiento que se va a implementar
         print('\nTipos de ordenamientos disponibles: ')
         print('1- Insertion Sort')
         print('2- Selection Sort')
         print('3- Shell Sort')
         type_sort = input('Seleccione el tipo de ordenamiento que desea ejecutar:\n')
-        
+        #aquí llamo a la función que definí arriba, mira cuales son los parametros 0_0
+        sort_sublist(numlen, type_sort)
 
     else:
         sys.exit(0)
 sys.exit(0)
+
+#Ahora sigue al controller :)))

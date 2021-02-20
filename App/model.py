@@ -37,6 +37,7 @@ los mismos.
 
 # Construccion de modelos
 def newCatalog(est_datos):
+    #Los condicionales de aquí dictan que Est. de datos implementar de acuerdo a lo que el usario puso en el view y que luego pasó por el controller
     if est_datos == 1:
         x = 'ARRAY_LIST'
     else:
@@ -70,6 +71,8 @@ def getFirstVideo(catalog):
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+#La función que ves aquí simplemente le entran dos videos y devuelve True si el segundo video tiene mas o igual views que el primero
 def cmpVideosByViews(video_1, video_2):
     if video_1['views']<video_2['views']:
         valor = True
@@ -78,3 +81,11 @@ def cmpVideosByViews(video_1, video_2):
     return valor
 
 # Funciones de ordenamiento
+
+#Esta de aquí sería tu parte, con los datos que llegaron del view y pasaron por el controller, en estafunción debes
+#crear y ordenar una sublista de tamaño numlen y con la función de ordenamiento type_sort. Recuerda que type_sort es un número, así que aquí
+#tienes que usar condicionales tal que, 1 = insertion_sort 2 = selection_sort 3 = Shell_sort. Recuerda también imprimir el tiempo que se demora.
+#No estaría de más basarte en el sort del ejemplo del lab04. Cualquier cosa escríbeme!!
+def sort_sublist(numlen, type_sort):
+
+    return None
