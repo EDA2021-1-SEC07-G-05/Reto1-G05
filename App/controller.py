@@ -55,8 +55,9 @@ def loadCategory(catalog):
 # Funciones de ordenamiento
 
 #El único cambio está aquí, esto simplemente le pide al model que ejecute la función que aparece en el return
-def sort_sublist(numlen, type_sort):
-    return model.sort_sublist(numlen, type_sort)
+"""Agregué el 'catalog'"""
+def sort_sublist(catalog, numlen, type_sort):
+    return model.sort_sublist(catalog,numlen,type_sort)
 
 # Funciones de consulta sobre el catálogo
 def getFirstVideo(catalog):

@@ -35,6 +35,7 @@ operación solicitada
 """
 
 #Holaaa, te voy a dejar estas notas para que sepas que fue lo que hice
+"""Hola, ahora yo te voy a dejar los comentarios de lo que hice de esta forma para que no te confundas jaja"""
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
@@ -53,8 +54,11 @@ def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
 
 #Aquí cree una función que va a iniciar el proceso de ordenar la sublista de videos, luego la llamo en el menu...
-def sort_sublist(numlen, type_sort):
-    return controller.sort_sublist(numlen, type_sort)
+"""Aqui y en casi todas las funciones agregue 'catalog' porque no me funcionaba sin el parametro, y pues así estaba en 
+el ejemplo :)"""
+
+def sort_sublist(catalog, numlen, type_sort):
+    return controller.sort_sublist(catalog, numlen, type_sort)
 
 def primerVideo(diccionario):
     title = diccionario['title']
@@ -66,7 +70,6 @@ def primerVideo(diccionario):
     dislikes = diccionario['dislikes']
 
     return title, cannel_title, trending_date, country, views, likes, dislikes
-
 
 """
 Menu principal
@@ -101,9 +104,13 @@ while True:
         print('1- Insertion Sort')
         print('2- Selection Sort')
         print('3- Shell Sort')
-        type_sort = input('Seleccione el tipo de ordenamiento que desea ejecutar:\n')
+        type_sort = int(input('Seleccione el tipo de ordenamiento que desea ejecutar:\n'))
         #aquí llamo a la función que definí arriba, mira cuales son los parametros 0_0
-        sort_sublist(numlen, type_sort)
+        """Aqui convertí el 'type_sort' en un int, porque el input lo recibia como un str. En la parte de 'result' 
+        llame ese parametro así porque para imprimir el tiempo me daba un error de cuando python piensa que estas 
+        llamando la funcion en vez de una variable porque se llaman igual"""
+        result= sort_sublist(catalog, numlen, type_sort)
+        print('El tiempo (mseg) ordenando la muestra es de: ' + str(result[0]))
 
     else:
         sys.exit(0)

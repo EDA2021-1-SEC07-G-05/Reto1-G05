@@ -26,8 +26,11 @@
 
 
 import config as cf
+import time 
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import selectionsort as slc
 assert cf
 
 """
@@ -86,6 +89,22 @@ def cmpVideosByViews(video_1, video_2):
 #crear y ordenar una sublista de tamaño numlen y con la función de ordenamiento type_sort. Recuerda que type_sort es un número, así que aquí
 #tienes que usar condicionales tal que, 1 = insertion_sort 2 = selection_sort 3 = Shell_sort. Recuerda también imprimir el tiempo que se demora.
 #No estaría de más basarte en el sort del ejemplo del lab04. Cualquier cosa escríbeme!!
-def sort_sublist(numlen, type_sort):
+"""Aqui está la función que me dijiste, espero que haya quedado bien :)"""
+def sort_sublist(catalog, numlen, type_sort):
 
-    return None
+    sub_list= lt.subList(catalog['videos'],1,numlen)
+    sub_list= sub_list.copy()
+    start_time= time.process_time()
+
+    if type_sort==1: 
+        sorted_list =ins.sort(sub_list,cmpVideosByViews)
+    
+    elif type_sort ==2:
+        sorted_list= slc.sort(sub_list,cmpVideosByViews)
+     
+    else: 
+        sorted_list = sa.sort(sub_list,cmpVideosByViews)
+    
+    stop_time= time.process_time()
+    elapsed_time_mseg = (stop_time-start_time)*1000 
+    return elapsed_time_mseg, sorted_list
