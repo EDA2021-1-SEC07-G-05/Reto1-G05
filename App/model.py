@@ -102,3 +102,5 @@ def sort_sublist(catalog, numlen, type_sort):
     stop_time= time.process_time()
     elapsed_time_mseg = (stop_time-start_time)*1000 
     return elapsed_time_mseg, sorted_list
+
+    
