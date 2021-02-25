@@ -77,7 +77,7 @@ def getFirstVideo(catalog):
 
 #La función que ves aquí simplemente le entran dos videos y devuelve True si el segundo video tiene mas o igual views que el primero
 def cmpVideosByViews(video_1, video_2):
-    if video_1['views']<video_2['views']:
+    if int(video_1['views'])<int(video_2['views']):
         valor = True
     else:
         valor = False
