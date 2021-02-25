@@ -25,7 +25,9 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
-#holis
+
+def funcion_boba():
+    pass
 
 """
 La vista se encarga de la interacción con el usuario
