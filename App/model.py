@@ -31,6 +31,8 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import selectionsort as slc
+from DISClib.Algorithms.Sorting import mergesort as mg 
+from DISClib.Algorithms.Sorting import quicksort as qc
 assert cf
 
 """
@@ -95,12 +97,16 @@ def sort_sublist(catalog, numlen, type_sort):
     
     elif type_sort ==2:
         sorted_list= slc.sort(sub_list,cmpVideosByViews)
+    
+    elif type_sort==3:
+        sorted_list = sa.sort(sub_list,cmpVideosByViews)
+    
+    elif type_sort==4:
+        sorted_list = mg.sort(sub_list,cmpVideosByViews)
      
     else: 
-        sorted_list = sa.sort(sub_list,cmpVideosByViews)
+        sorted_list = qc.sort(sub_list,cmpVideosByViews)
     
     stop_time= time.process_time()
     elapsed_time_mseg = (stop_time-start_time)*1000 
     return elapsed_time_mseg, sorted_list
-
-#holaaa
