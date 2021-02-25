@@ -98,8 +98,10 @@ while True:
         print('1- Insertion Sort')
         print('2- Selection Sort')
         print('3- Shell Sort')
+        print('4- Merge Sort')
+        print('5- Quick Sort')
         type_sort = int(input('Seleccione el tipo de ordenamiento que desea ejecutar:\n'))
-        result= sort_sublist(catalog, numlen, type_sort)
+        result = sort_sublist(catalog, numlen, type_sort)
         print('El tiempo (mseg) ordenando la muestra es de: ' + str(result[0]))
 
     else:
