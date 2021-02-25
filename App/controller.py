@@ -33,6 +33,7 @@ El controlador se encarga de mediar entre la vista y el modelo.
 def initCatalog(est_datos):
     catalog = model.newCatalog(est_datos)
     return catalog
+
 # Funciones para la carga de datos
 def loadData(catalog):
     loadVideos(catalog)
@@ -54,8 +55,6 @@ def loadCategory(catalog):
     return None
 # Funciones de ordenamiento
 
-#El único cambio está aquí, esto simplemente le pide al model que ejecute la función que aparece en el return
-"""Agregué el 'catalog'"""
 def sort_sublist(catalog, numlen, type_sort):
     return model.sort_sublist(catalog,numlen,type_sort)
 
