@@ -50,7 +50,7 @@ def newCatalog(est_datos):
     catalog = {'videos': None,   
                'category': None}
     
-    catalog['videos'] = lt.newList(x)
+    catalog['videos'] = lt.newList(x, cmpfunction = cmpVideos)
     catalog['category'] = lt.newList('ARRAY_LIST')
     return catalog
 
@@ -83,6 +83,14 @@ def cmpVideosByViews(video_1, video_2):
     else:
         valor = False
     return valor
+
+def cmpVideos(video_1, video_2):
+    if int(video_1['id'])>int(video_2['id']):
+        return 1
+    elif int(video_1['id']) == int(video_2['id']):
+        return 0
+    else:
+        return -1
 
 # Funciones de ordenamiento
 
