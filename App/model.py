@@ -78,16 +78,16 @@ def getFirstVideo(catalog):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def cmpVideosByViews(video_1, video_2):
-    if int(video_1['views'])<int(video_2['views']):
+    if video_1['views']<video_2['views']:
         valor = True
     else:
         valor = False
     return valor
 
 def cmpVideos(video_1, video_2):
-    if int(video_1['id'])>int(video_2['id']):
+    if int(video_1['video_id'])>int(video_2['id']):
         return 1
-    elif int(video_1['id']) == int(video_2['id']):
+    elif int(video_1['video_id']) == int(video_2['id']):
         return 0
     else:
         return -1
