@@ -43,6 +43,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print('2- Requerimiento 1')
+    print("3- Requerimiento 2")
     print("0- Salir")
 
 
@@ -56,11 +57,21 @@ def loadData(catalog):
 def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
 
-def sort_sublist(catalog, numlen, type_sort, category, country):
-    return controller.sort_sublist(catalog, numlen, type_sort, category, country)
+def sort_sublist(catalog, numlen, category, country):
+    return controller.sort_sublist(catalog, numlen, category, country)
 
 def get_all_elements(catalog):
     return controller.get_all_elements(catalog)
+
+def mostTrendingVideo(catalog, country):
+    return controller.mostTrendingVideo(catalog, country)
+
+def view_req2(diccionario):
+    title = diccionario['title']
+    cannel_title = diccionario['channel_title']
+    country = diccionario['country']
+    days = diccionario['trending_days']
+    return title, cannel_title, country, days
 
 def view_req1(diccionario):
     title = diccionario['title']
@@ -105,18 +116,10 @@ while True:
         print(primerVideo(getFirstVideo(catalog)))
         
     elif int(inputs[0]) == 2:
-
-        print('\nTipos de ordenamientos disponibles: ')
-        print('1- Insertion Sort')
-        print('2- Selection Sort')
-        print('3- Shell Sort')
-        print('4- Merge Sort')
-        print('5- Quick Sort')
-        type_sort = int(input('Seleccione el tipo de ordenamiento que desea ejecutar:\n'))
         numlen = int(input('Digite la cantidad de videos con más views que desea consultar:\n'))
         category = input('Digite la categoria que desea consultar:\n')
         country = input('Digite el país que desea consultar:\n')
-        result = sort_sublist(catalog, numlen, type_sort, category, country)
+        result = sort_sublist(catalog, numlen, category, country)
 
         try:
             pos = 1
@@ -128,6 +131,12 @@ while True:
         except:
             print(result)
         
+    elif int(inputs[0]) == 3:
+        country = input('Registre el país sobre el cual desea hacer la consulta:\n')
+        print('Estamos trabajando duro para entregarte los resultados, por favor espera unos segundos...')
+        result = mostTrendingVideo(catalog, country)
+        print(view_req2(result))
+
     else:
         sys.exit(0)
 sys.exit(0)

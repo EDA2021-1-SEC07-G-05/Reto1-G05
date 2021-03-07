@@ -88,8 +88,24 @@ def get_all_elements(catalog):
         pos = 1
         resultado.append(lt.getElement(catalog, pos))
         pos += 1
-
     return resultado
+
+def mostTrendingVideo(catalog, country):
+    lista_trabajo = lt.newList('SINGLE_LINKED', cmpVideos)
+
+    for video in lt.iterator(catalog['videos']):
+
+        if lt.isPresent(lista_trabajo, video) != 0:
+            pos = lt.isPresent(lista_trabajo, video)
+            lt.getElement(lista_trabajo, pos)['trending_days'] += 1
+
+        elif video['country'] == country:
+            lt.addFirst(lista_trabajo, video)
+            lt.firstElement(lista_trabajo)['trending_days'] = 1
+
+    sorted_list = mg.sort(lista_trabajo, cmpVideosByTrend)
+
+    return  lt.firstElement(sorted_list)
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
@@ -101,16 +117,22 @@ def cmpVideosByViews(video_1, video_2):
     return valor
 
 def cmpVideos(video_1, video_2):
-    if int(video_1['video_id'])>int(video_2['id']):
+    if video_1['video_id']>video_2['video_id']:
         return 1
-    elif int(video_1['video_id']) == int(video_2['id']):
+    elif video_1['video_id'] == video_2['video_id']:
         return 0
     else:
         return -1
 
+def cmpVideosByTrend(video_1, video_2):
+    if video_1['trending_days'] > video_2['trending_days']:
+        valor = True
+    else:
+        valor = False
+    return valor
 # Funciones de ordenamiento
 
-def sort_sublist(catalog, numlen, type_sort, category, country):
+def sort_sublist(catalog, numlen, category, country):
 
     lista_trabajo = lt.newList('ARRAY_LIST')
 
@@ -118,20 +140,8 @@ def sort_sublist(catalog, numlen, type_sort, category, country):
         if i['country'] == country and int(i['category_id']) == category:
             lt.addFirst(lista_trabajo, i)
 
-    if type_sort==1: 
-        sorted_list =ins.sort(lista_trabajo,cmpVideosByViews)
     
-    elif type_sort ==2:
-        sorted_list= slc.sort(lista_trabajo,cmpVideosByViews)
-    
-    elif type_sort==3:
-        sorted_list = sa.sort(lista_trabajo,cmpVideosByViews)
-    
-    elif type_sort==4:
-        sorted_list = mg.sort(lista_trabajo,cmpVideosByViews)
-     
-    else: 
-        sorted_list = qc.sort(lista_trabajo,cmpVideosByViews)
+    sorted_list = mg.sort(lista_trabajo, cmpVideosByViews)
 
     try:
         resultado = lt.subList(sorted_list,1,numlen)
