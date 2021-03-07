@@ -75,10 +75,26 @@ def newCategory(name, ide):
 def getFirstVideo(catalog):
     return lt.firstElement(catalog['videos'])
 
+def getCategory_id(catalog, category):
+    for i in lt.iterator(catalog['category']):
+        if i['cat_name'] == ' ' + category:
+            cat_id = int(i['cat_id'])
+            break
+    return cat_id
+
+def get_all_elements(catalog):
+    resultado = list()
+    for i in lt.iterator(catalog):
+        pos = 1
+        resultado.append(lt.getElement(catalog, pos))
+        pos += 1
+
+    return resultado
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def cmpVideosByViews(video_1, video_2):
-    if video_1['views']<video_2['views']:
+    if int(video_1['views'])>int(video_2['views']):
         valor = True
     else:
         valor = False
@@ -94,27 +110,31 @@ def cmpVideos(video_1, video_2):
 
 # Funciones de ordenamiento
 
-def sort_sublist(catalog, numlen, type_sort):
+def sort_sublist(catalog, numlen, type_sort, category, country):
 
-    sub_list= lt.subList(catalog['videos'],1,numlen)
-    sub_list= sub_list.copy()
-    start_time= time.process_time()
+    lista_trabajo = lt.newList('ARRAY_LIST')
+
+    for i in lt.iterator(catalog['videos']):
+        if i['country'] == country and int(i['category_id']) == category:
+            lt.addFirst(lista_trabajo, i)
 
     if type_sort==1: 
-        sorted_list =ins.sort(sub_list,cmpVideosByViews)
+        sorted_list =ins.sort(lista_trabajo,cmpVideosByViews)
     
     elif type_sort ==2:
-        sorted_list= slc.sort(sub_list,cmpVideosByViews)
+        sorted_list= slc.sort(lista_trabajo,cmpVideosByViews)
     
     elif type_sort==3:
-        sorted_list = sa.sort(sub_list,cmpVideosByViews)
+        sorted_list = sa.sort(lista_trabajo,cmpVideosByViews)
     
     elif type_sort==4:
-        sorted_list = mg.sort(sub_list,cmpVideosByViews)
+        sorted_list = mg.sort(lista_trabajo,cmpVideosByViews)
      
     else: 
-        sorted_list = qc.sort(sub_list,cmpVideosByViews)
-    
-    stop_time= time.process_time()
-    elapsed_time_mseg = (stop_time-start_time)*1000 
-    return elapsed_time_mseg, sorted_list
+        sorted_list = qc.sort(lista_trabajo,cmpVideosByViews)
+
+    try:
+        resultado = lt.subList(sorted_list,1,numlen)
+    except:
+        resultado = 'No existen tantos videos, intente con un número más pequeño...'
+    return resultado

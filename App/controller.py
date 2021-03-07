@@ -41,7 +41,7 @@ def loadData(catalog):
     return None
 
 def loadVideos(catalog):
-    datos_videos = cf.data_dir + 'videos-large.csv'
+    datos_videos = cf.data_dir + 'videos-30pct.csv'
     input_file = csv.DictReader(open(datos_videos, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog,video)
@@ -55,10 +55,14 @@ def loadCategory(catalog):
     return None
 # Funciones de ordenamiento
 
-def sort_sublist(catalog, numlen, type_sort):
-    return model.sort_sublist(catalog,numlen,type_sort)
+def sort_sublist(catalog, numlen, type_sort, category, country):
+    cat_id = model.getCategory_id(catalog, category)
+    return model.sort_sublist(catalog,numlen,type_sort,cat_id, country)
 
 # Funciones de consulta sobre el catálogo
 def getFirstVideo(catalog):
     video_dict = model.getFirstVideo(catalog)
     return video_dict
+
+def get_all_elements(catalog):
+    return model.get_all_elements(catalog)

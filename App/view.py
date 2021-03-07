@@ -42,7 +42,7 @@ sys.setrecursionlimit(default_limit*10)
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print('2- Ordenar una sublista por views')
+    print('2- Requerimiento 1')
     print("0- Salir")
 
 
@@ -56,8 +56,21 @@ def loadData(catalog):
 def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
 
-def sort_sublist(catalog, numlen, type_sort):
-    return controller.sort_sublist(catalog, numlen, type_sort)
+def sort_sublist(catalog, numlen, type_sort, category, country):
+    return controller.sort_sublist(catalog, numlen, type_sort, category, country)
+
+def get_all_elements(catalog):
+    return controller.get_all_elements(catalog)
+
+def view_req1(diccionario):
+    title = diccionario['title']
+    cannel_title = diccionario['channel_title']
+    publish_time = diccionario['publish_time']
+    views = diccionario['views']
+    likes = diccionario['likes']
+    dislikes = diccionario['dislikes']
+    tags = diccionario['tags']
+    return title, cannel_title, publish_time, views, likes, dislikes, tags
 
 def primerVideo(diccionario):
     title = diccionario['title']
@@ -92,12 +105,6 @@ while True:
         print(primerVideo(getFirstVideo(catalog)))
         
     elif int(inputs[0]) == 2:
-        
-        i = True
-        while i:
-            numlen = int(input('Digite la longitud de la lista, un número menor o igual a '+str(lt.size(catalog['videos']))+'\n'))
-            if numlen<=lt.size(catalog['videos']):
-                i = False
 
         print('\nTipos de ordenamientos disponibles: ')
         print('1- Insertion Sort')
@@ -106,9 +113,21 @@ while True:
         print('4- Merge Sort')
         print('5- Quick Sort')
         type_sort = int(input('Seleccione el tipo de ordenamiento que desea ejecutar:\n'))
-        result = sort_sublist(catalog, numlen, type_sort)
-        print('El tiempo (mseg) ordenando la muestra es de: ' + str(result[0]))
+        numlen = int(input('Digite la cantidad de videos con más views que desea consultar:\n'))
+        category = input('Digite la categoria que desea consultar:\n')
+        country = input('Digite el país que desea consultar:\n')
+        result = sort_sublist(catalog, numlen, type_sort, category, country)
 
+        try:
+            pos = 1
+            for i in lt.iterator(result):
+                print(f'Video número {pos}')
+                print(view_req1(i))
+                print('\n')
+                pos += 1
+        except:
+            print(result)
+        
     else:
         sys.exit(0)
 sys.exit(0)
