@@ -67,6 +67,10 @@ def getFirstVideo(catalog):
 def get_all_elements(catalog):
     return model.get_all_elements(catalog)
 
-def mostTrendingVideo(catalog, country):
-    resultado = model.mostTrendingVideo(catalog, country)
-    return resultado
+def mostTrendingVideo(catalog, attribute, indicator):
+    if indicator == 0:
+        result = model.mostTrendingVideo(catalog, attribute, indicator)
+    else:
+        cat_id = str(model.getCategory_id(catalog, attribute))
+        result = model.mostTrendingVideo(catalog, cat_id, indicator)
+    return result

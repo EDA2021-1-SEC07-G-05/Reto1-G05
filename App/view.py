@@ -26,9 +26,6 @@ import controller
 from DISClib.ADT import list as lt
 assert cf
 
-def funcion_boba():
-    pass
-
 """
 La vista se encarga de la interacción con el usuario
 Presenta el menu de opciones y por cada seleccion
@@ -44,6 +41,8 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print('2- Requerimiento 1')
     print("3- Requerimiento 2")
+    print("4- Requerimiento 3")
+    print("5- Requerimiento 4")
     print("0- Salir")
 
 
@@ -63,8 +62,8 @@ def sort_sublist(catalog, numlen, category, country):
 def get_all_elements(catalog):
     return controller.get_all_elements(catalog)
 
-def mostTrendingVideo(catalog, country):
-    return controller.mostTrendingVideo(catalog, country)
+def mostTrendingVideo(catalog, attribute, indicator):
+    return controller.mostTrendingVideo(catalog, attribute, indicator)
 
 def view_req2(diccionario):
     title = diccionario['title']
@@ -93,6 +92,25 @@ def primerVideo(diccionario):
     dislikes = diccionario['dislikes']
 
     return title, cannel_title, trending_date, country, views, likes, dislikes
+
+def view_req3(diccionario):
+    title = diccionario['title']
+    cannel_title = diccionario['channel_title']
+    category_id= diccionario['category_id']
+    days = diccionario['trending_days']
+
+    return title, cannel_title, category_id, days 
+
+def view_req4(diccionario):
+    title= diccionario['title']
+    cannel_title = diccionario['channel_title']
+    publish_time = diccionario['publish_time']
+    views = diccionario['views']
+    likes = diccionario['likes']
+    dislikes = diccionario['dislikes']
+    tags = diccionario['tags']
+
+    return title, cannel_title, publish_time, views, likes, dislikes, tags
 
 """
 Menu principal
@@ -132,12 +150,22 @@ while True:
             print(result)
         
     elif int(inputs[0]) == 3:
+        indicator = 0
         country = input('Registre el país sobre el cual desea hacer la consulta:\n')
         print('Estamos trabajando duro para entregarte los resultados, por favor espera unos segundos...')
-        result = mostTrendingVideo(catalog, country)
+        result = mostTrendingVideo(catalog, country, indicator)
         print(view_req2(result))
+    
+    elif int(inputs[0]) == 4: 
+        indicator = 1
+        category_name = input('Registre la categoría sobre la cual desea hacer la consulta:\n')
+        print('Estamos trabajando duro para entregarte los resultados, por favor espera unos segundos...')
+        result = mostTrendingVideo(catalog, category_name, indicator)
+        print (view_req3(result))
+    
+    elif int(inputs[0]) == 5:
+        tag = input('Registre el tag sobre el cual desea hacer la consulta:\n')
 
     else:
         sys.exit(0)
 sys.exit(0)
-#hoaaa

@@ -90,21 +90,31 @@ def get_all_elements(catalog):
         pos += 1
     return resultado
 
-def mostTrendingVideo(catalog, country):
+def mostTrendingVideo(catalog, attribute, indicator):
     lista_trabajo = lt.newList('SINGLE_LINKED', cmpVideos)
 
-    for video in lt.iterator(catalog['videos']):
+    if indicator == 0:
+        for video in lt.iterator(catalog['videos']):
+            if lt.isPresent(lista_trabajo, video) != 0:
+                pos = lt.isPresent(lista_trabajo, video)
+                lt.getElement(lista_trabajo, pos)['trending_days'] += 1
 
-        if lt.isPresent(lista_trabajo, video) != 0:
-            pos = lt.isPresent(lista_trabajo, video)
-            lt.getElement(lista_trabajo, pos)['trending_days'] += 1
+            elif video['country'] == attribute:
+                lt.addFirst(lista_trabajo, video)
+                lt.firstElement(lista_trabajo)['trending_days'] = 1
 
-        elif video['country'] == country:
-            lt.addFirst(lista_trabajo, video)
-            lt.firstElement(lista_trabajo)['trending_days'] = 1
+    else: 
+        for video in lt.iterator(catalog['videos']):
+            if lt.isPresent(lista_trabajo, video) != 0:
+                pos = lt.isPresent(lista_trabajo, video)
+                lt.getElement(lista_trabajo, pos)['trending_days'] += 1
+
+            elif video['category_id'] == attribute:
+                lt.addFirst(lista_trabajo, video)
+                lt.firstElement(lista_trabajo)['trending_days'] = 1
 
     sorted_list = mg.sort(lista_trabajo, cmpVideosByTrend)
-
+       
     return  lt.firstElement(sorted_list)
 
 # Funciones utilizadas para comparar elementos dentro de una lista
