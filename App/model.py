@@ -91,7 +91,7 @@ def get_all_elements(catalog):
     return resultado
 
 def mostTrendingVideo(catalog, attribute, indicator):
-    lista_trabajo = lt.newList('ARRAY_LIST', cmpVideos)
+    lista_trabajo = lt.newList('SINGLE_LINKED', cmpVideos)
 
     if indicator == 0:
         for video in lt.iterator(catalog['videos']):
@@ -151,7 +151,7 @@ def cmpVideosByLikes(video_1, video_2):
 
 def sort_sublist(catalog, numlen, category, country, tag, indicator):
 
-    lista_trabajo = lt.newList('ARRAY_LIST')
+    lista_trabajo = lt.newList('SINGLE_LINKED')
 
     if indicator == 1:
         function = cmpVideosByViews
