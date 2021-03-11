@@ -39,10 +39,10 @@ sys.setrecursionlimit(default_limit*10)
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print('2- Requerimiento 1')
-    print("3- Requerimiento 2")
-    print("4- Requerimiento 3")
-    print("5- Requerimiento 4")
+    print('2- n-Videos con más views según país y categoría')
+    print("3- Video con más tendencias según país")
+    print("4- Video con más tendencias según categoría")
+    print("5- n-Videos con mas likes según país y tag")
     print("0- Salir")
 
 
@@ -119,11 +119,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-       
-        print('\nSelección de estructura:')
-        print('1- Arreglo')
-        print('2- Lista encadenada')
-        est_datos = input('Seleccione que tipo de estructura desea implementar para el catálogo\n')
+        est_datos = 1
         print("Cargando información de los archivos ....")
         catalog = initCatalog(est_datos)
         loadData(catalog)
@@ -131,7 +127,7 @@ while True:
         print('\nLista de categorías')
         print(catalog['category']['elements'])
         print('\nElementos del primer video')
-        print(primerVideo(getFirstVideo(catalog)))
+        print(primerVideo(getFirstVideo(catalog)),'\n')
         
     elif int(inputs[0]) == 2:
         indicator = 1
