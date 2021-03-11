@@ -91,7 +91,7 @@ def get_all_elements(catalog):
     return resultado
 
 def mostTrendingVideo(catalog, attribute, indicator):
-    lista_trabajo = lt.newList('SINGLE_LINKED', cmpVideos)
+    lista_trabajo = lt.newList('ARRAY_LIST', cmpVideos)
 
     if indicator == 0:
         for video in lt.iterator(catalog['videos']):
