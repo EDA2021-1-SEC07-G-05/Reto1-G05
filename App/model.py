@@ -140,19 +140,34 @@ def cmpVideosByTrend(video_1, video_2):
     else:
         valor = False
     return valor
+
+def cmpVideosByLikes(video_1, video_2):
+    if int(video_1['likes']) > int(video_2['likes']):
+        valor = True
+    else:
+        valor = False
+    return valor
 # Funciones de ordenamiento
 
-def sort_sublist(catalog, numlen, category, country):
+def sort_sublist(catalog, numlen, category, country, tag, indicator):
 
     lista_trabajo = lt.newList('ARRAY_LIST')
 
-    for i in lt.iterator(catalog['videos']):
-        if i['country'] == country and int(i['category_id']) == category:
-            lt.addFirst(lista_trabajo, i)
+    if indicator == 1:
+        function = cmpVideosByViews
+        for i in lt.iterator(catalog['videos']):
+            if i['country'] == country and int(i['category_id']) == category:
+                lt.addFirst(lista_trabajo, i)
 
     
-    sorted_list = mg.sort(lista_trabajo, cmpVideosByViews)
+    else:
+        function = cmpVideosByLikes
+        for i in lt.iterator(catalog['videos']):
+            if i['country'] == country and (tag in i['tags']):
+                lt.addFirst(lista_trabajo, i)
 
+
+    sorted_list = mg.sort(lista_trabajo, function)
     try:
         resultado = lt.subList(sorted_list,1,numlen)
     except:

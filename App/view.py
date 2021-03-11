@@ -56,8 +56,8 @@ def loadData(catalog):
 def getFirstVideo(catalog):
     return controller.getFirstVideo(catalog)
 
-def sort_sublist(catalog, numlen, category, country):
-    return controller.sort_sublist(catalog, numlen, category, country)
+def sort_sublist(catalog, numlen, category, country, tag, indicator):
+    return controller.sort_sublist(catalog, numlen, category, country, tag, indicator)
 
 def get_all_elements(catalog):
     return controller.get_all_elements(catalog)
@@ -134,10 +134,11 @@ while True:
         print(primerVideo(getFirstVideo(catalog)))
         
     elif int(inputs[0]) == 2:
+        indicator = 1
         numlen = int(input('Digite la cantidad de videos con más views que desea consultar:\n'))
         category = input('Digite la categoria que desea consultar:\n')
         country = input('Digite el país que desea consultar:\n')
-        result = sort_sublist(catalog, numlen, category, country)
+        result = sort_sublist(catalog, numlen, category, country, None, indicator)
 
         try:
             pos = 1
@@ -164,7 +165,22 @@ while True:
         print (view_req3(result))
     
     elif int(inputs[0]) == 5:
+        indicator = 0
         tag = input('Registre el tag sobre el cual desea hacer la consulta:\n')
+        country = input('Registre el país sobre el cual desea hacer la consulta:\n')
+        numlen = int(input('Registre la cantidad de videos con más views que desea consultar:\n'))
+        print('Estamos trabajando duro para entregarte los resultados, por favor espera unos segundos...')
+        result = sort_sublist(catalog, numlen, 'no aplica', country, tag, indicator)
+        
+        try:
+            pos = 1
+            for i in lt.iterator(result):
+                print(f'Video número {pos}')
+                print(view_req4(i))
+                print('\n')
+                pos += 1
+        except:
+            print(result)
 
     else:
         sys.exit(0)
